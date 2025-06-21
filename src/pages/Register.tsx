@@ -146,8 +146,9 @@ const Register = () => {
             <div className="absolute -top-2 -right-2 w-16 h-16 bg-gradient-to-r from-orange-200 to-red-200 dark:from-orange-800 dark:to-red-800 rounded-full opacity-20 blur-xl"></div>
             
             <CardHeader className="text-center relative z-10">
-              <div className="mx-auto mb-4 p-3 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl shadow-lg w-fit">
-                <Sparkles className="h-8 w-8 text-white" />
+              <div className="mx-auto mb-4 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl shadow-lg w-fit">
+                <img src="/achievo_dark.png" alt="Task Manager" className="h-14 w-14 dark:hidden rounded-lg" />
+                <img src="/achievo.png" alt="Task Manager" className="h-14 w-14 hidden dark:block rounded-lg" />
               </div>
               <CardTitle className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-red-500 dark:from-orange-400 dark:to-red-400 bg-clip-text text-transparent">
                 Crie sua conta

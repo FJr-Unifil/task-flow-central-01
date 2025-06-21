@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Plus, Calendar, CheckCircle2, Circle, Edit, Trash2, Star, Sparkles, Target, Clock, LogOut, User } from 'lucide-react';
 import TaskForm from '@/components/TaskForm';
+import DeleteConfirmationDialog from '@/components/DeleteConfirmationDialog';
 import ThemeToggle from '@/components/ThemeToggle';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
@@ -33,6 +34,15 @@ const Index = () => {
   
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
+  const [deleteDialog, setDeleteDialog] = useState<{
+    isOpen: boolean;
+    taskId: string | null;
+    taskTitle: string;
+  }>({
+    isOpen: false,
+    taskId: null,
+    taskTitle: '',
+  });
 
   const { user, logout } = useAuth();
   const { toast } = useToast();
@@ -45,6 +55,10 @@ const Index = () => {
     };
     setTasks([newTask, ...tasks]);
     setIsFormOpen(false);
+    toast({
+      title: "Tarefa criada!",
+      description: "Sua nova tarefa foi adicionada com sucesso.",
+    });
   };
 
   const handleUpdateTask = (taskData: Omit<Task, 'id' | 'createdAt'>) => {
@@ -55,11 +69,35 @@ const Index = () => {
           : task
       ));
       setEditingTask(null);
+      toast({
+        title: "Tarefa atualizada!",
+        description: "As alterações foram salvas com sucesso.",
+      });
     }
   };
 
-  const handleDeleteTask = (taskId: string) => {
-    setTasks(tasks.filter(task => task.id !== taskId));
+  const handleDeleteClick = (taskId: string, taskTitle: string) => {
+    setDeleteDialog({
+      isOpen: true,
+      taskId,
+      taskTitle,
+    });
+  };
+
+  const handleDeleteConfirm = () => {
+    if (deleteDialog.taskId) {
+      const taskToDelete = tasks.find(task => task.id === deleteDialog.taskId);
+      setTasks(tasks.filter(task => task.id !== deleteDialog.taskId));
+      setDeleteDialog({ isOpen: false, taskId: null, taskTitle: '' });
+      toast({
+        title: "Tarefa removida!",
+        description: `"${taskToDelete?.title}" foi deletada com sucesso.`,
+      });
+    }
+  };
+
+  const handleDeleteCancel = () => {
+    setDeleteDialog({ isOpen: false, taskId: null, taskTitle: '' });
   };
 
   const handleToggleComplete = (taskId: string) => {
@@ -99,43 +137,47 @@ const Index = () => {
   const pendingTasks = tasks.filter(task => !task.completed);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 relative overflow-hidden">
-      {/* Background decorative elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-r from-pink-300/20 to-purple-300/20 dark:from-pink-500/10 dark:to-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-r from-blue-300/20 to-cyan-300/20 dark:from-blue-500/10 dark:to-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-yellow-200/10 to-orange-200/10 dark:from-yellow-500/5 dark:to-orange-500/5 rounded-full blur-3xl"></div>
-      </div>
-
-      <div className="container mx-auto px-4 py-8 relative z-10">
-        {/* Header with user info and logout */}
-        <div className="mb-8 relative">
-          <div className="absolute top-0 right-0 flex items-center space-x-3">
-            <div className="flex items-center space-x-3 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-lg px-4 py-2 border border-orange-200 dark:border-orange-600">
-              <div className="flex items-center space-x-2">
-                <div className="p-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-full">
-                  <User className="h-4 w-4 text-white" />
-                </div>
-                <div className="text-sm">
-                  <p className="font-medium text-gray-900 dark:text-white">{user?.name}</p>
-                  <p className="text-gray-500 dark:text-gray-400">{user?.email}</p>
-                </div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-orange-50 to-red-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+      {/* Header */}
+      <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border-b border-orange-200 dark:border-orange-600 sticky top-0 z-40">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="rounded-2xl shadow-lg">
+                <img src="/achievo_dark.png" alt="Task Manager" className="h-12 w-12 dark:hidden rounded-2xl" />
+                <img src="/achievo.png" alt="Task Manager" className="h-12 w-12 hidden dark:block rounded-2xl" />
               </div>
+              <div>
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-red-500 dark:from-orange-400 dark:to-red-400 bg-clip-text text-transparent">
+                  Task Manager
+                </h1>
+                <p className="text-sm text-gray-600 dark:text-gray-300">Bem-vindo, {user?.email}</p>
+              </div>
+            </div>
+            
+            <div className="flex items-center space-x-3">
+              <ThemeToggle />
               <Button
                 variant="outline"
-                size="sm"
                 onClick={handleLogout}
-                className="flex items-center space-x-2 border-2 border-red-200 dark:border-red-800 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 transition-all duration-300"
+                className="flex items-center border-2 border-orange-200 dark:border-orange-600 hover:bg-orange-50 dark:hover:bg-orange-900/20 transition-all duration-300"
               >
-                <LogOut className="h-4 w-4" />
-                <span>Sair</span>
+                <LogOut className="h-4 w-4 mr-2" />
+                Logout
               </Button>
             </div>
-            <ThemeToggle />
           </div>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="container mx-auto px-4 py-8">
+        {/* Enhanced Header with Logo */}
+        <div className="mb-8">
           <div className="flex items-center space-x-4 mb-4">
-            <div className="p-3 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl shadow-lg">
-              <Sparkles className="h-8 w-8 text-white" />
+            <div className="rounded-2xl shadow-lg">
+              <img src="/achievo_dark.png" alt="Task Manager" className="h-24 w-24 dark:hidden rounded-3xl" />
+              <img src="/achievo.png" alt="Task Manager" className="h-24 w-24 hidden dark:block rounded-3xl" />
             </div>
             <div>
               <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2 bg-gradient-to-r from-orange-500 to-red-500 dark:from-orange-400 dark:to-red-400 bg-clip-text text-transparent">
@@ -213,7 +255,7 @@ const Index = () => {
         <div className="mb-8">
           <Button 
             onClick={() => setIsFormOpen(true)}
-            className="bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 hover:from-orange-600 hover:via-red-600 hover:to-pink-600 text-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border-2 border-white/20 backdrop-blur-sm relative overflow-hidden group"
+            className="bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 hover:from-orange-600 hover:via-red-600 hover:to-pink-600 text-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 backdrop-blur-sm relative overflow-hidden group"
             size="lg"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
@@ -238,8 +280,13 @@ const Index = () => {
             </Card>
           ) : (
             tasks.map((task, index) => (
-              <Card key={task.id} className={`transition-all duration-300 hover:shadow-xl hover:scale-[1.02] ${task.completed ? 'opacity-75 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20' : 'bg-gradient-to-r from-white to-gray-50 dark:from-slate-800 dark:to-slate-700'} border-l-4 ${task.priority === 'high' ? 'border-l-red-400' : task.priority === 'medium' ? 'border-l-yellow-400' : 'border-l-green-400'} shadow-lg relative overflow-hidden group`}>
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
+              <Card 
+                key={task.id} 
+                className={`bg-gradient-to-br from-white to-gray-50 dark:from-slate-800 dark:to-slate-700 border-2 border-orange-200 dark:border-orange-600 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] relative overflow-hidden group ${
+                  task.completed ? 'opacity-75' : ''
+                }`}
+              >
+                <div className="absolute -top-2 -right-2 w-16 h-16 bg-gradient-to-r from-orange-200 to-red-200 dark:from-orange-800 dark:to-red-800 rounded-full opacity-20 blur-xl group-hover:opacity-30 transition-opacity duration-300"></div>
                 <CardContent className="p-6 relative z-10">
                   <div className="flex items-start justify-between">
                     <div className="flex items-start space-x-4 flex-1">
@@ -255,7 +302,7 @@ const Index = () => {
                       </button>
                       
                       <div className="flex-1">
-                        <h3 className={`text-lg font-semibold mb-2 ${task.completed ? 'line-through text-gray-500' : 'text-gray-900'}`}>
+                        <h3 className={`text-lg font-semibold mb-2 ${task.completed ? 'line-through text-gray-500 dark:text-gray-400': 'text-gray-900 dark:text-gray-100'}`}>
                           {task.title}
                         </h3>
                         {task.description && (
@@ -291,7 +338,7 @@ const Index = () => {
                       <Button
                         variant="ghost"
                         size="sm"
-                        onClick={() => handleDeleteTask(task.id)}
+                        onClick={() => handleDeleteClick(task.id, task.title)}
                         className="hover:bg-red-50 hover:text-red-600"
                       >
                         <Trash2 className="h-4 w-4" />
@@ -313,6 +360,17 @@ const Index = () => {
           }}
           onSubmit={editingTask ? handleUpdateTask : handleCreateTask}
           initialData={editingTask}
+        />
+
+        {/* Delete Confirmation Dialog */}
+        <DeleteConfirmationDialog
+          isOpen={deleteDialog.isOpen}
+          onClose={handleDeleteCancel}
+          onConfirm={handleDeleteConfirm}
+          title="Confirmar Exclusão"
+          description={`Tem certeza que deseja excluir a tarefa "${deleteDialog.taskTitle}"? Esta ação não pode ser desfeita.`}
+          confirmText="Sim, Deletar"
+          cancelText="Cancelar"
         />
       </div>
     </div>

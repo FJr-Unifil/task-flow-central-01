@@ -5,8 +5,9 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { DatePicker } from '@/components/ui/date-picker';
 import { Task, Priority } from '@/types/task';
-import { Calendar, Save, X, Sparkles } from 'lucide-react';
+import { Save, X, Sparkles } from 'lucide-react';
 
 interface TaskFormProps {
   isOpen: boolean;
@@ -20,7 +21,7 @@ const TaskForm = ({ isOpen, onClose, onSubmit, initialData }: TaskFormProps) => 
     title: '',
     description: '',
     priority: 'medium' as Priority,
-    dueDate: '',
+    dueDate: undefined as Date | undefined,
     completed: false,
   });
 
@@ -30,7 +31,7 @@ const TaskForm = ({ isOpen, onClose, onSubmit, initialData }: TaskFormProps) => 
         title: initialData.title,
         description: initialData.description || '',
         priority: initialData.priority,
-        dueDate: initialData.dueDate || '',
+        dueDate: initialData.dueDate ? new Date(initialData.dueDate) : undefined,
         completed: initialData.completed,
       });
     } else {
@@ -38,7 +39,7 @@ const TaskForm = ({ isOpen, onClose, onSubmit, initialData }: TaskFormProps) => 
         title: '',
         description: '',
         priority: 'medium',
-        dueDate: '',
+        dueDate: undefined,
         completed: false,
       });
     }
@@ -50,7 +51,7 @@ const TaskForm = ({ isOpen, onClose, onSubmit, initialData }: TaskFormProps) => 
       onSubmit({
         ...formData,
         description: formData.description.trim() || undefined,
-        dueDate: formData.dueDate || undefined,
+        dueDate: formData.dueDate?.toISOString() || undefined,
       });
       handleClose();
     }
@@ -61,7 +62,7 @@ const TaskForm = ({ isOpen, onClose, onSubmit, initialData }: TaskFormProps) => 
       title: '',
       description: '',
       priority: 'medium',
-      dueDate: '',
+      dueDate: undefined,
       completed: false,
     });
     onClose();
@@ -73,8 +74,9 @@ const TaskForm = ({ isOpen, onClose, onSubmit, initialData }: TaskFormProps) => 
         <DialogHeader className="relative">
           <div className="absolute -top-2 -right-2 w-16 h-16 bg-gradient-to-r from-orange-200 to-red-200 dark:from-orange-800 dark:to-red-800 rounded-full opacity-20 blur-xl"></div>
           <DialogTitle className="text-xl font-semibold flex items-center space-x-2 relative z-10">
-            <div className="p-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg">
-              <Sparkles className="h-5 w-5 text-white" />
+            <div className="bg-gradient-to-r from-orange-500 to-red-500 rounded-lg">
+              <img src="/achievo_dark.png" alt="Task Manager" className="h-14 w-14 dark:hidden rounded-lg" />
+              <img src="/achievo.png" alt="Task Manager" className="h-14 w-14 hidden dark:block rounded-lg" />
             </div>
             <span className="bg-gradient-to-r from-orange-500 to-red-500 dark:from-orange-400 dark:to-red-400 bg-clip-text text-transparent">
               {initialData ? 'Edit Task' : 'Create New Task'}
@@ -151,16 +153,11 @@ const TaskForm = ({ isOpen, onClose, onSubmit, initialData }: TaskFormProps) => 
               <Label htmlFor="dueDate" className="text-sm font-medium text-gray-700 dark:text-gray-200">
                 Due Date
               </Label>
-              <div className="relative">
-                <Input
-                  id="dueDate"
-                  type="date"
-                  value={formData.dueDate}
-                  onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })}
-                  className="w-full border-2 border-orange-200 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-400 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm transition-all duration-300"
-                />
-                <Calendar className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-orange-400 pointer-events-none" />
-              </div>
+              <DatePicker
+                value={formData.dueDate}
+                onValueChange={(date) => setFormData({ ...formData, dueDate: date })}
+                placeholder="Select due date..."
+              />
             </div>
           </div>
 
