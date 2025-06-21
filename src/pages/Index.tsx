@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -7,8 +8,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Card, CardContent } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { TaskForm } from '@/components/TaskForm';
-import { ThemeToggle } from '@/components/ThemeToggle';
+import TaskForm from '@/components/TaskForm';
+import ThemeToggle from '@/components/ThemeToggle';
 import { Task, Priority } from '@/types/task';
 import { Calendar, CheckCircle, Clock, Copy, Edit, Filter, Plus, Save, Sparkles, Trash, X } from 'lucide-react';
 import { v4 as uuidv4 } from 'uuid';
@@ -37,7 +38,7 @@ const Index = () => {
   const addTask = (task: Omit<Task, 'id' | 'createdAt'>) => {
     const newTask: Task = {
       id: uuidv4(),
-      createdAt: new Date(),
+      createdAt: new Date().toISOString(),
       ...task,
     };
     setTasks([...tasks, newTask]);
