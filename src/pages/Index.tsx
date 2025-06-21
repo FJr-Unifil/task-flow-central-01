@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Plus, Calendar, CheckCircle2, Circle, Edit, Trash2, Star, Sparkles, Target, Clock } from 'lucide-react';
+import { Plus, Calendar, CheckCircle2, Circle, Edit, Trash2, Star, Sparkles, Target, Clock, LogOut, User } from 'lucide-react';
 import TaskForm from '@/components/TaskForm';
 import ThemeToggle from '@/components/ThemeToggle';
+import { useAuth } from '@/contexts/AuthContext';
+import { useToast } from '@/hooks/use-toast';
 import { Task, Priority } from '@/types/task';
 
 const Index = () => {
@@ -31,6 +33,9 @@ const Index = () => {
   
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [editingTask, setEditingTask] = useState<Task | null>(null);
+
+  const { user, logout } = useAuth();
+  const { toast } = useToast();
 
   const handleCreateTask = (taskData: Omit<Task, 'id' | 'createdAt'>) => {
     const newTask: Task = {
@@ -65,6 +70,14 @@ const Index = () => {
     ));
   };
 
+  const handleLogout = () => {
+    logout();
+    toast({
+      title: "Logout realizado",
+      description: "Você foi desconectado com sucesso.",
+    });
+  };
+
   const getPriorityColor = (priority: Priority) => {
     switch (priority) {
       case 'high': return 'bg-red-100 text-red-800 border-red-200';
@@ -95,17 +108,37 @@ const Index = () => {
       </div>
 
       <div className="container mx-auto px-4 py-8 relative z-10">
-        {/* Header with theme toggle */}
+        {/* Header with user info and logout */}
         <div className="mb-8 relative">
-          <div className="absolute top-0 right-0">
+          <div className="absolute top-0 right-0 flex items-center space-x-3">
+            <div className="flex items-center space-x-3 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-lg px-4 py-2 border border-orange-200 dark:border-orange-600">
+              <div className="flex items-center space-x-2">
+                <div className="p-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-full">
+                  <User className="h-4 w-4 text-white" />
+                </div>
+                <div className="text-sm">
+                  <p className="font-medium text-gray-900 dark:text-white">{user?.name}</p>
+                  <p className="text-gray-500 dark:text-gray-400">{user?.email}</p>
+                </div>
+              </div>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handleLogout}
+                className="flex items-center space-x-2 border-2 border-red-200 dark:border-red-800 hover:bg-red-50 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400 transition-all duration-300"
+              >
+                <LogOut className="h-4 w-4" />
+                <span>Sair</span>
+              </Button>
+            </div>
             <ThemeToggle />
           </div>
           <div className="flex items-center space-x-4 mb-4">
-            <div className="p-3 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl shadow-lg">
+            <div className="p-3 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl shadow-lg">
               <Sparkles className="h-8 w-8 text-white" />
             </div>
             <div>
-              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2 bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-indigo-400 dark:to-purple-400 bg-clip-text text-transparent">
+              <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2 bg-gradient-to-r from-orange-500 to-red-500 dark:from-orange-400 dark:to-red-400 bg-clip-text text-transparent">
                 Task Manager
               </h1>
               <p className="text-gray-600 dark:text-gray-300 flex items-center space-x-2">
@@ -180,7 +213,7 @@ const Index = () => {
         <div className="mb-8">
           <Button 
             onClick={() => setIsFormOpen(true)}
-            className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-indigo-600 hover:via-purple-600 hover:to-pink-600 text-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border-2 border-white/20 backdrop-blur-sm relative overflow-hidden group"
+            className="bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 hover:from-orange-600 hover:via-red-600 hover:to-pink-600 text-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border-2 border-white/20 backdrop-blur-sm relative overflow-hidden group"
             size="lg"
           >
             <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
@@ -196,7 +229,7 @@ const Index = () => {
             <Card className="p-12 text-center bg-gradient-to-br from-gray-50 to-gray-100 dark:from-slate-800 dark:to-slate-700 border-2 border-dashed border-gray-300 dark:border-slate-600 relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-r from-blue-100/50 via-purple-100/50 to-pink-100/50 dark:from-blue-900/20 dark:via-purple-900/20 dark:to-pink-900/20 opacity-50"></div>
               <div className="text-gray-400 dark:text-gray-500 mb-4 relative z-10">
-                <div className="mx-auto mb-6 w-20 h-20 bg-gradient-to-r from-indigo-200 to-purple-200 dark:from-indigo-800 dark:to-purple-800 rounded-full flex items-center justify-center">
+                <div className="mx-auto mb-6 w-20 h-20 bg-gradient-to-r from-orange-200 to-red-200 dark:from-orange-800 dark:to-red-800 rounded-full flex items-center justify-center">
                   <Circle className="h-10 w-10" />
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-gray-600 dark:text-gray-300">No tasks yet</h3>
@@ -217,7 +250,7 @@ const Index = () => {
                         {task.completed ? (
                           <CheckCircle2 className="h-6 w-6 text-green-500" />
                         ) : (
-                          <Circle className="h-6 w-6 text-gray-400 hover:text-indigo-500" />
+                          <Circle className="h-6 w-6 text-gray-400 hover:text-orange-500" />
                         )}
                       </button>
                       
