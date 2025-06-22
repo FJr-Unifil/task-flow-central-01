@@ -49,7 +49,7 @@ const Landing = () => {
               <Button
                 variant="outline"
                 size="lg"
-                className="border-2 border-orange-200 dark:border-orange-600 hover:bg-orange-50 dark:hover:bg-orange-900/20 flex items-center space-x-2 transition-all duration-300"
+                className="border border-gray-200 dark:border-slate-600 hover:bg-gray-50 dark:hover:bg-slate-700/50 flex items-center space-x-2 transition-all duration-300"
               >
                 <UserPlus className="h-5 w-5" />
                 <span>Criar conta</span>

@@ -1,4 +1,3 @@
-import * as React from "react";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { Calendar as CalendarIcon } from "lucide-react";
@@ -33,7 +32,7 @@ export function DatePicker({
         <Button
           variant="outline"
           className={cn(
-            "w-full justify-start text-left font-normal border-2 border-orange-200 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-400 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm transition-all duration-300",
+            "w-full justify-start text-left font-normal border border-gray-300 dark:border-slate-600 focus:border-orange-400 focus:ring-1 focus:ring-orange-200 dark:focus:ring-orange-500/30 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm transition-all duration-300",
             !value && "text-muted-foreground",
             className
           )}
@@ -47,7 +46,7 @@ export function DatePicker({
           )}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-0 bg-white/95 dark:bg-slate-800/95 backdrop-blur-sm border-2 border-orange-200 dark:border-orange-600">
+      <PopoverContent className="w-auto p-0 bg-white/95 dark:bg-slate-800/95 backdrop-blur-sm border border-gray-200 dark:border-slate-600">
         <Calendar
           mode="single"
           selected={value}
@@ -62,7 +61,7 @@ export function DatePicker({
             caption_label: "text-sm font-medium text-gray-900 dark:text-white",
             nav: "space-x-1 flex items-center",
             nav_button: cn(
-              "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 border border-orange-200 dark:border-orange-600 hover:bg-orange-50 dark:hover:bg-orange-900/20 rounded-md"
+              "h-7 w-7 bg-transparent p-0 opacity-50 hover:opacity-100 border border-gray-200 dark:border-slate-600 hover:bg-orange-50 dark:hover:bg-orange-900/20 rounded-md"
             ),
             nav_button_previous: "absolute left-1",
             nav_button_next: "absolute right-1",

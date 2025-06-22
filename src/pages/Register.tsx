@@ -142,7 +142,7 @@ const Register = () => {
         </div>
 
         <div className="flex items-center justify-center min-h-[calc(100vh-200px)]">
-          <Card className="w-full max-w-md bg-gradient-to-br from-white to-gray-50 dark:from-slate-800 dark:to-slate-900 border-2 border-orange-200 dark:border-orange-600 shadow-2xl relative overflow-hidden">
+          <Card className="w-full max-w-md bg-gradient-to-br from-white to-gray-50 dark:from-slate-800 dark:to-slate-900 border-2 border-gray-300 dark:border-slate-700 shadow-2xl relative overflow-hidden">
             <div className="absolute -top-2 -right-2 w-16 h-16 bg-gradient-to-r from-orange-200 to-red-200 dark:from-orange-800 dark:to-red-800 rounded-full opacity-20 blur-xl"></div>
             
             <CardHeader className="text-center relative z-10">
@@ -177,11 +177,11 @@ const Register = () => {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="Seu nome completo"
-                    className={`w-full border-2 ${
+                    className={`w-full border ${
                       errors.name 
                         ? 'border-red-300 dark:border-red-600' 
-                        : 'border-orange-200 dark:border-orange-600'
-                    } focus:border-orange-400 dark:focus:border-orange-400 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm transition-all duration-300`}
+                        : 'border-gray-300 dark:border-slate-600'
+                    } focus:border-orange-400 focus:ring-1 focus:ring-orange-200 dark:focus:ring-orange-500/30 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm transition-all duration-300`}
                     required
                     disabled={isLoading}
                   />
@@ -201,11 +201,11 @@ const Register = () => {
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                     placeholder="seu@email.com"
-                    className={`w-full border-2 ${
+                    className={`w-full border ${
                       errors.email 
                         ? 'border-red-300 dark:border-red-600' 
-                        : 'border-orange-200 dark:border-orange-600'
-                    } focus:border-orange-400 dark:focus:border-orange-400 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm transition-all duration-300`}
+                        : 'border-gray-300 dark:border-slate-600'
+                    } focus:border-orange-400 focus:ring-1 focus:ring-orange-200 dark:focus:ring-orange-500/30 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm transition-all duration-300`}
                     required
                     disabled={isLoading}
                   />
@@ -226,11 +226,11 @@ const Register = () => {
                       value={formData.password}
                       onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                       placeholder="Sua senha"
-                      className={`w-full border-2 ${
+                      className={`w-full border ${
                         errors.password 
                           ? 'border-red-300 dark:border-red-600' 
-                          : 'border-orange-200 dark:border-orange-600'
-                      } focus:border-orange-400 dark:focus:border-orange-400 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm transition-all duration-300 pr-10`}
+                          : 'border-gray-300 dark:border-slate-600'
+                      } focus:border-orange-400 focus:ring-1 focus:ring-orange-200 dark:focus:ring-orange-500/30 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm transition-all duration-300 pr-10`}
                       required
                       disabled={isLoading}
                     />
@@ -260,11 +260,11 @@ const Register = () => {
                       value={formData.confirmPassword}
                       onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
                       placeholder="Confirme sua senha"
-                      className={`w-full border-2 ${
-                        errors.confirmPassword 
-                          ? 'border-red-300 dark:border-red-600' 
-                          : 'border-orange-200 dark:border-orange-600'
-                      } focus:border-orange-400 dark:focus:border-orange-400 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm transition-all duration-300 pr-10`}
+                      className={`w-full border ${
+                      errors.confirmPassword 
+                        ? 'border-red-300 dark:border-red-600' 
+                        : 'border-gray-300 dark:border-slate-600'
+                    } focus:border-orange-400 focus:ring-1 focus:ring-orange-200 dark:focus:ring-orange-500/30 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm transition-all duration-300 pr-10`}
                       required
                       disabled={isLoading}
                     />
@@ -285,7 +285,7 @@ const Register = () => {
                 <Button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 hover:from-orange-600 hover:via-red-600 hover:to-pink-600 text-white shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border-2 border-white/20 backdrop-blur-sm relative overflow-hidden group"
+                  className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-medium py-2.5 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-2 border border-orange-600 dark:border-orange-700"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                   <span className="relative z-10">

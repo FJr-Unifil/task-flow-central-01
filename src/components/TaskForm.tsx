@@ -70,7 +70,7 @@ const TaskForm = ({ isOpen, onClose, onSubmit, initialData }: TaskFormProps) => 
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[500px] bg-gradient-to-br from-white to-gray-50 dark:from-slate-800 dark:to-slate-900 border-2 border-orange-200 dark:border-orange-600 shadow-2xl">
+      <DialogContent className="sm:max-w-[500px] bg-gradient-to-br from-white to-gray-50 dark:from-slate-800 dark:to-slate-900 border-2 dark:border-slate-600 shadow-2xl">
         <DialogHeader className="relative">
           <div className="absolute -top-2 -right-2 w-16 h-16 bg-gradient-to-r from-orange-200 to-red-200 dark:from-orange-800 dark:to-red-800 rounded-full opacity-20 blur-xl"></div>
           <DialogTitle className="text-xl font-semibold flex items-center space-x-2 relative z-10">
@@ -95,7 +95,7 @@ const TaskForm = ({ isOpen, onClose, onSubmit, initialData }: TaskFormProps) => 
               value={formData.title}
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
               placeholder="Enter task title..."
-              className="w-full border-2 border-orange-200 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-400 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm transition-all duration-300"
+              className="w-full border border-gray-200 dark:border-slate-600 focus:border-orange-400 focus:ring-1 focus:ring-orange-200 dark:focus:ring-orange-500/30 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm transition-all duration-300"
               required
             />
           </div>
@@ -109,7 +109,7 @@ const TaskForm = ({ isOpen, onClose, onSubmit, initialData }: TaskFormProps) => 
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
               placeholder="Add a description (optional)..."
-              className="w-full resize-none border-2 border-orange-200 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-400 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm transition-all duration-300"
+              className="w-full resize-none border border-gray-200 dark:border-slate-600 focus:border-orange-400 focus:ring-1 focus:ring-orange-200 dark:focus:ring-orange-500/30 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm transition-all duration-300"
               rows={3}
             />
           </div>
@@ -123,10 +123,10 @@ const TaskForm = ({ isOpen, onClose, onSubmit, initialData }: TaskFormProps) => 
                 value={formData.priority}
                 onValueChange={(value: Priority) => setFormData({ ...formData, priority: value })}
               >
-                <SelectTrigger className="border-2 border-orange-200 dark:border-orange-600 focus:border-orange-400 dark:focus:border-orange-400 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm">
+                <SelectTrigger className="border border-gray-200 dark:border-slate-600 focus:border-orange-400 focus:ring-1 focus:ring-orange-200 dark:focus:ring-orange-500/30 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="bg-white/95 dark:bg-slate-800/95 backdrop-blur-sm border-2 border-orange-200 dark:border-orange-600">
+                <SelectContent className="bg-white/95 dark:bg-slate-800/95 backdrop-blur-sm border border-gray-200 dark:border-slate-600">
                   <SelectItem value="high" className="hover:bg-red-50 dark:hover:bg-red-900/20">
                     <span className="flex items-center">
                       <span className="w-3 h-3 bg-gradient-to-r from-red-400 to-red-600 rounded-full mr-2 shadow-sm"></span>
@@ -166,7 +166,7 @@ const TaskForm = ({ isOpen, onClose, onSubmit, initialData }: TaskFormProps) => 
               type="button"
               variant="outline"
               onClick={handleClose}
-              className="flex items-center border-2 border-gray-300 dark:border-slate-600 hover:bg-gray-50 dark:hover:bg-slate-700 transition-all duration-300"
+              className="flex items-center border border-gray-200 dark:border-slate-600 hover:bg-gray-50 dark:hover:bg-slate-700 transition-all duration-300"
             >
               <X className="h-4 w-4 mr-2" />
               Cancel
