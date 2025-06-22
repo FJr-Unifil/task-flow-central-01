@@ -7,22 +7,25 @@ import ThemeToggle from '@/components/ThemeToggle';
 const Landing = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 relative overflow-hidden">
-      {/* Background decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-r from-pink-300/20 to-purple-300/20 dark:from-pink-500/10 dark:to-purple-500/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-r from-blue-300/20 to-cyan-300/20 dark:from-blue-500/10 dark:to-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-yellow-200/10 to-orange-200/10 dark:from-yellow-500/5 dark:to-orange-500/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-yellow-200/10 to-orange-200/10 dark:from-yellow-500/5 dark:to-orange-500/5 rounded-full blur-3xl"></div>
+        
+        <div className="absolute inset-0 opacity-5 dark:opacity-[0.04]" style={{
+          backgroundImage: 'linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)',
+          backgroundSize: '40px 40px',
+          color: 'var(--color-gray-900)'
+        }}></div>
       </div>
 
       <div className="container mx-auto px-4 py-8 relative z-10">
-        {/* Header */}
         <div className="mb-8 relative">
           <div className="absolute top-0 right-0">
             <ThemeToggle />
           </div>
         </div>
 
-        {/* Hero Section */}
         <div className="text-center mb-16">
           <div className="mx-auto mb-8 rounded-3xl shadow-2xl w-fit">
             <img src="/achievo_dark.png" alt="Task Manager" className="h-24 w-24 dark:hidden rounded-3xl" />
@@ -58,7 +61,6 @@ const Landing = () => {
           </div>
         </div>
 
-        {/* Features Section */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
           <Card className="bg-gradient-to-br from-white to-gray-50 dark:from-slate-800 dark:to-slate-700 border-2 border-orange-200 dark:border-orange-600 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 relative overflow-hidden group">
             <div className="absolute -top-2 -right-2 w-16 h-16 bg-gradient-to-r from-orange-200 to-red-200 dark:from-orange-800 dark:to-red-800 rounded-full opacity-20 blur-xl"></div>
@@ -106,7 +108,6 @@ const Landing = () => {
           </Card>
         </div>
 
-        {/* CTA Section */}
         <div className="text-center">
           <Card className="bg-gradient-to-br from-orange-500 to-red-500 text-white border-0 shadow-2xl relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/10 to-white/0 transform -skew-x-12 -translate-x-full animate-pulse"></div>

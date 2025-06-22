@@ -170,6 +170,12 @@ const Index = () => {
         </div>
       </div>
 
+      <div className="absolute inset-0 opacity-5 dark:opacity-[0.04]" style={{
+          backgroundImage: 'linear-gradient(to right, currentColor 1px, transparent 1px), linear-gradient(to bottom, currentColor 1px, transparent 1px)',
+          backgroundSize: '40px 40px',
+          color: 'var(--color-gray-900)'
+      }}></div>
+
       {/* Main Content */}
       <div className="container mx-auto px-4 py-8">
         {/* Enhanced Header with Logo */}
