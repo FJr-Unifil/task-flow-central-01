@@ -16,7 +16,7 @@ const Index = () => {
       id: '1',
       title: 'Complete project proposal',
       description: 'Finalize the Q4 project proposal and submit to management',
-      priority: 'high',
+      priority: 'Alta',
       dueDate: '2024-12-25',
       completed: false,
       createdAt: new Date().toISOString(),
@@ -25,7 +25,7 @@ const Index = () => {
       id: '2',
       title: 'Review team feedback',
       description: 'Go through all team feedback from last sprint',
-      priority: 'medium',
+      priority: 'Média',
       dueDate: '2024-12-22',
       completed: true,
       createdAt: new Date().toISOString(),
@@ -118,9 +118,9 @@ const Index = () => {
 
   const getPriorityColor = (priority: Priority) => {
     switch (priority) {
-      case 'high': return 'bg-red-100 text-red-800 border-red-200';
-      case 'medium': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
-      case 'low': return 'bg-green-100 text-green-800 border-green-200';
+      case 'Alta': return 'bg-red-100 text-red-800 border-red-200';
+      case 'Média': return 'bg-yellow-100 text-yellow-800 border-yellow-200';
+      case 'Baixa': return 'bg-green-100 text-green-800 border-green-200';
       default: return 'bg-gray-100 text-gray-800 border-gray-200';
     }
   };
@@ -138,7 +138,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-orange-50 to-red-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
-      {/* Header */}
       <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm border-b border-gray-200 dark:border-slate-700 sticky top-0 z-40">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
@@ -149,9 +148,8 @@ const Index = () => {
               </div>
               <div>
                 <h1 className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-red-500 dark:from-orange-400 dark:to-red-400 bg-clip-text text-transparent">
-                  Task Manager
+                  Achievo
                 </h1>
-                <p className="text-sm text-gray-600 dark:text-gray-300">Bem-vindo, {user?.email}</p>
               </div>
             </div>
             
@@ -163,7 +161,7 @@ const Index = () => {
                 className="flex items-center border border-gray-200 dark:border-slate-600 hover:bg-gray-50 dark:hover:bg-slate-700/50 transition-all duration-300"
               >
                 <LogOut className="h-4 w-4 mr-2" />
-                Logout
+                Sair
               </Button>
             </div>
           </div>
@@ -176,9 +174,7 @@ const Index = () => {
           color: 'var(--color-gray-900)'
       }}></div>
 
-      {/* Main Content */}
       <div className="container mx-auto px-4 py-8">
-        {/* Enhanced Header with Logo */}
         <div className="mb-8">
           <div className="flex items-center space-x-4 mb-4">
             <div className="rounded-2xl shadow-lg">
@@ -187,17 +183,16 @@ const Index = () => {
             </div>
             <div>
               <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2 bg-gradient-to-r from-orange-500 to-red-500 dark:from-orange-400 dark:to-red-400 bg-clip-text text-transparent">
-                Task Manager
+                Achievo
               </h1>
               <p className="text-gray-600 dark:text-gray-300 flex items-center space-x-2">
                 <Target className="h-4 w-4" />
-                <span>Organize your work and get things done efficiently</span>
+                <span>Conquiste seus objetivos com facilidade</span>
               </p>
             </div>
           </div>
         </div>
 
-        {/* Enhanced Stats with more visual details */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <Card className="bg-gradient-to-br from-purple-500 to-purple-600 dark:from-purple-600 dark:to-purple-700 text-white border-0 shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl transform translate-x-8 -translate-y-8"></div>
@@ -206,10 +201,10 @@ const Index = () => {
                 <div>
                   <p className="text-blue-100 flex items-center space-x-2">
                     <Clock className="h-4 w-4" />
-                    <span>Total Tasks</span>
+                    <span>Total de Tarefas</span>
                   </p>
                   <p className="text-4xl font-bold animate-pulse">{tasks.length}</p>
-                  <div className="mt-2 text-xs text-blue-200">Keep going! 🚀</div>
+                  <div className="mt-2 text-xs text-blue-200">Vamos lá! ✨</div>
                 </div>
                 <div className="p-3 bg-white/20 rounded-2xl backdrop-blur-sm">
                   <Star className="h-8 w-8 text-blue-200" />
@@ -225,10 +220,10 @@ const Index = () => {
                 <div>
                   <p className="text-green-100 flex items-center space-x-2">
                     <CheckCircle2 className="h-4 w-4" />
-                    <span>Completed</span>
+                    <span>Completadas</span>
                   </p>
                   <p className="text-4xl font-bold">{completedTasks.length}</p>
-                  <div className="mt-2 text-xs text-green-200">Great job! ✨</div>
+                  <div className="mt-2 text-xs text-green-200">Continue assim! 🚀</div>
                 </div>
                 <div className="p-3 bg-white/20 rounded-2xl backdrop-blur-sm">
                   <CheckCircle2 className="h-8 w-8 text-green-200" />
@@ -244,10 +239,10 @@ const Index = () => {
                 <div>
                   <p className="text-orange-100 flex items-center space-x-2">
                     <Circle className="h-4 w-4" />
-                    <span>Pending</span>
+                    <span>Pendentes</span>
                   </p>
                   <p className="text-4xl font-bold">{pendingTasks.length}</p>
-                  <div className="mt-2 text-xs text-orange-200">Let's do this! 💪</div>
+                  <div className="mt-2 text-xs text-orange-200">Você consegue! 💪</div>
                 </div>
                 <div className="p-3 bg-white/20 rounded-2xl backdrop-blur-sm">
                   <Circle className="h-8 w-8 text-orange-200" />
@@ -257,7 +252,6 @@ const Index = () => {
           </Card>
         </div>
 
-        {/* Enhanced Add Task Button */}
         <div className="mb-8">
           <Button 
             onClick={() => setIsFormOpen(true)}
@@ -266,12 +260,11 @@ const Index = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
             <Plus className="h-5 w-5 mr-2 relative z-10" />
-            <span className="relative z-10">Add New Task</span>
+            <span className="relative z-10">Adicionar nova tarefa</span>
             <Sparkles className="h-4 w-4 ml-2 relative z-10" />
           </Button>
         </div>
 
-        {/* Enhanced Tasks List */}
         <div className="space-y-4">
           {tasks.length === 0 ? (
             <Card className="p-12 text-center bg-gradient-to-br from-gray-50 to-gray-100 dark:from-slate-800 dark:to-slate-700 border-2 border-dashed border-gray-300 dark:border-slate-600 relative overflow-hidden">
@@ -280,8 +273,8 @@ const Index = () => {
                 <div className="mx-auto mb-6 w-20 h-20 bg-gradient-to-r from-orange-200 to-red-200 dark:from-orange-800 dark:to-red-800 rounded-full flex items-center justify-center">
                   <Circle className="h-10 w-10" />
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-gray-600 dark:text-gray-300">No tasks yet</h3>
-                <p className="text-gray-500 dark:text-gray-400">Create your first task to get started on your journey! 🎯</p>
+                <h3 className="text-xl font-semibold mb-2 text-gray-600 dark:text-gray-300">Nenhuma tarefa cadastrada</h3>
+                <p className="text-gray-500 dark:text-gray-400">Crie sua primeira tarefa para começar sua jornada! 🎯</p>
               </div>
             </Card>
           ) : (
@@ -357,7 +350,6 @@ const Index = () => {
           )}
         </div>
 
-        {/* Task Form Modal */}
         <TaskForm
           isOpen={isFormOpen || editingTask !== null}
           onClose={() => {
@@ -368,7 +360,6 @@ const Index = () => {
           initialData={editingTask}
         />
 
-        {/* Delete Confirmation Dialog */}
         <DeleteConfirmationDialog
           isOpen={deleteDialog.isOpen}
           onClose={handleDeleteCancel}

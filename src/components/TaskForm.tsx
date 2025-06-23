@@ -20,7 +20,7 @@ const TaskForm = ({ isOpen, onClose, onSubmit, initialData }: TaskFormProps) => 
   const [formData, setFormData] = useState({
     title: '',
     description: '',
-    priority: 'medium' as Priority,
+    priority: 'Média' as Priority,
     dueDate: undefined as Date | undefined,
     completed: false,
   });
@@ -38,7 +38,7 @@ const TaskForm = ({ isOpen, onClose, onSubmit, initialData }: TaskFormProps) => 
       setFormData({
         title: '',
         description: '',
-        priority: 'medium',
+        priority: 'Média',
         dueDate: undefined,
         completed: false,
       });
@@ -61,7 +61,7 @@ const TaskForm = ({ isOpen, onClose, onSubmit, initialData }: TaskFormProps) => 
     setFormData({
       title: '',
       description: '',
-      priority: 'medium',
+      priority: 'Média',
       dueDate: undefined,
       completed: false,
     });
@@ -79,7 +79,7 @@ const TaskForm = ({ isOpen, onClose, onSubmit, initialData }: TaskFormProps) => 
               <img src="/achievo.png" alt="Task Manager" className="h-14 w-14 hidden dark:block rounded-lg" />
             </div>
             <span className="bg-gradient-to-r from-orange-500 to-red-500 dark:from-orange-400 dark:to-red-400 bg-clip-text text-transparent">
-              {initialData ? 'Edit Task' : 'Create New Task'}
+              {initialData ? 'Editar Tarefa' : 'Criar Nova Tarefa'}
             </span>
           </DialogTitle>
         </DialogHeader>
@@ -87,7 +87,7 @@ const TaskForm = ({ isOpen, onClose, onSubmit, initialData }: TaskFormProps) => 
         <form onSubmit={handleSubmit} className="space-y-6 relative">
           <div className="space-y-2">
             <Label htmlFor="title" className="text-sm font-medium text-gray-700 dark:text-gray-200 flex items-center space-x-1">
-              <span>Task Title</span>
+              <span>Título da Tarefa</span>
               <span className="text-red-500">*</span>
             </Label>
             <Input
@@ -102,7 +102,7 @@ const TaskForm = ({ isOpen, onClose, onSubmit, initialData }: TaskFormProps) => 
 
           <div className="space-y-2">
             <Label htmlFor="description" className="text-sm font-medium text-gray-700 dark:text-gray-200">
-              Description
+              Descrição
             </Label>
             <Textarea
               id="description"
@@ -117,7 +117,7 @@ const TaskForm = ({ isOpen, onClose, onSubmit, initialData }: TaskFormProps) => 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="priority" className="text-sm font-medium text-gray-700 dark:text-gray-200">
-                Priority
+                Prioridade
               </Label>
               <Select
                 value={formData.priority}
@@ -126,23 +126,23 @@ const TaskForm = ({ isOpen, onClose, onSubmit, initialData }: TaskFormProps) => 
                 <SelectTrigger className="border border-gray-200 dark:border-slate-600 focus:border-orange-400 focus:ring-1 focus:ring-orange-200 dark:focus:ring-orange-500/30 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent className="bg-white/95 dark:bg-slate-800/95 backdrop-blur-sm border border-gray-200 dark:border-slate-600">
-                  <SelectItem value="high" className="hover:bg-red-50 dark:hover:bg-red-900/20">
+                <SelectContent className="bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 shadow-lg rounded-lg overflow-hidden">
+                  <SelectItem value="Alta" className="hover:bg-red-50 dark:hover:bg-red-900/20">
                     <span className="flex items-center">
                       <span className="w-3 h-3 bg-gradient-to-r from-red-400 to-red-600 rounded-full mr-2 shadow-sm"></span>
-                      High Priority
+                      Alta
                     </span>
                   </SelectItem>
-                  <SelectItem value="medium" className="hover:bg-yellow-50 dark:hover:bg-yellow-900/20">
+                  <SelectItem value="Média" className="hover:bg-yellow-50 dark:hover:bg-yellow-900/20">
                     <span className="flex items-center">
                       <span className="w-3 h-3 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full mr-2 shadow-sm"></span>
-                      Medium Priority
+                      Média
                     </span>
                   </SelectItem>
-                  <SelectItem value="low" className="hover:bg-green-50 dark:hover:bg-green-900/20">
+                  <SelectItem value="Baixa" className="hover:bg-green-50 dark:hover:bg-green-900/20">
                     <span className="flex items-center">
                       <span className="w-3 h-3 bg-gradient-to-r from-green-400 to-green-600 rounded-full mr-2 shadow-sm"></span>
-                      Low Priority
+                      Baixa
                     </span>
                   </SelectItem>
                 </SelectContent>
@@ -151,12 +151,12 @@ const TaskForm = ({ isOpen, onClose, onSubmit, initialData }: TaskFormProps) => 
 
             <div className="space-y-2">
               <Label htmlFor="dueDate" className="text-sm font-medium text-gray-700 dark:text-gray-200">
-                Due Date
+                Data Limite
               </Label>
               <DatePicker
                 value={formData.dueDate}
                 onValueChange={(date) => setFormData({ ...formData, dueDate: date })}
-                placeholder="Select due date..."
+                placeholder="Selecione a data limite..."
               />
             </div>
           </div>
@@ -169,7 +169,7 @@ const TaskForm = ({ isOpen, onClose, onSubmit, initialData }: TaskFormProps) => 
               className="flex items-center border border-gray-200 dark:border-slate-600 hover:bg-gray-50 dark:hover:bg-slate-700 transition-all duration-300"
             >
               <X className="h-4 w-4 mr-2" />
-              Cancel
+              Cancelar
             </Button>
             <Button
               type="submit"
@@ -177,7 +177,7 @@ const TaskForm = ({ isOpen, onClose, onSubmit, initialData }: TaskFormProps) => 
             >
               <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
               <Save className="h-4 w-4 mr-2 relative z-10" />
-              <span className="relative z-10">{initialData ? 'Update Task' : 'Create Task'}</span>
+              <span className="relative z-10">{initialData ? 'Atualizar Tarefa' : 'Criar Tarefa'}</span>
             </Button>
           </div>
         </form>
