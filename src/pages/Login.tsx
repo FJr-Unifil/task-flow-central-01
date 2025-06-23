@@ -183,7 +183,7 @@ const Login = () => {
                 <Button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full border border-gray-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-slate-700/50 font-medium py-2.5 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-300 flex items-center justify-center space-x-2 border border-orange-600 dark:border-orange-700 relative overflow-hidden group"
+                  className="w-full bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-medium py-2.5 px-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-2 border border-orange-600 dark:border-orange-700"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-white/0 via-white/20 to-white/0 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
                   <span className="relative z-10">
