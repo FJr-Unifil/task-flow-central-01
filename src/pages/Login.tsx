@@ -8,6 +8,7 @@ import { Separator } from '@/components/ui/separator';
 import { Eye, EyeOff, Mail, Lock, ArrowLeft } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useToast } from '@/hooks/use-toast';
+import ThemeToggle from '@/components/ThemeToggle';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -99,7 +100,7 @@ const Login = () => {
 
       <div className="container mx-auto px-4 py-8 relative z-10">
         {/* Header */}
-        <div className="mb-8 relative">
+        <div className="mb-8 relative flex justify-between items-start">
           <Link 
             to="/" 
             className="inline-flex items-center text-gray-600 dark:text-gray-300 hover:text-orange-600 dark:hover:text-orange-400 transition-colors duration-200 mb-4"
@@ -107,6 +108,7 @@ const Login = () => {
             <ArrowLeft className="h-4 w-4 mr-2" />
             Voltar ao início
           </Link>
+          <ThemeToggle />
         </div>
 
         <div className="flex items-center justify-center min-h-[calc(100vh-200px)]">
