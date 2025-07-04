@@ -60,6 +60,14 @@ This project is built with:
 - shadcn-ui
 - Tailwind CSS
 
+## Testing
+
+This project includes automated tests using:
+
+- Robot Framework - For end-to-end testing
+
+To run the Robot Framework tests, see the [Robot Framework Tests README](tests/robot/README.md).
+
 ## How can I deploy this project?
 
 Simply open [Lovable](https://lovable.dev/projects/151c7e58-c3ea-405c-b825-5d8d7d5f7f4a) and click on Share -> Publish.
